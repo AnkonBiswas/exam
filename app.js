@@ -9,6 +9,8 @@ var user  		= require('./controllers/user');
 var login  		= require('./controllers/login');
 var register  	= require('./controllers/register');
 var logout  	= require('./controllers/logout');
+var admin       = require('./controllers/admin');
+var customer    = require('./controllers/customer');
 var app 		= express();
 
 //CONGIFURATION
@@ -23,6 +25,8 @@ app.use('/user', user);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
+app.use('/admin', admin);
+app.use('/customer', customer);
 
 //ROUTING
 app.get('/', function(req, res){

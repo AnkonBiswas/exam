@@ -40,9 +40,12 @@ module.exports={
 		});
 	},
 	insert : function(user, callback){
-		var sql = "insert into users values('', ?, ?)";
-		db.execute(sql, [user.username, user.password], function(status){
-			callback(status);
+		var sql = "INSERT INTO users values('', ?, ?, ? , ? , ?);";
+		db.execute(sql, [user.username, user.password, user.fullname, user.gender, user.role], function(success){
+			callback(success);
+			console.log(user.username);
+			console.log(user.password);
+
 		});
 	},
 	update : function(user, callback){
@@ -58,12 +61,12 @@ module.exports={
 			callback(status);
 		});
 	}
-	register: function(user, callback){
-		var sql = "insert into users values('', ?, ?,?,?,?)";
-		db.execute(sql, [user.username, user.password, user.fullname, user.gender, user.role], function(status){
-			callback(status);
-		});
-	}
+	//register: function(user, callback){
+		//var sql = "insert into users values('', ?, ?,?,?,?)";
+		//db.execute(sql, [user.username, user.password, user.fullname, user.gender, user.role], function(status){
+			//callback(status);
+		//});
+	//}
 }	
 
 

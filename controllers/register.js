@@ -16,13 +16,11 @@ router.post('/', function(request, response){
 		role    : request.body.role
 	};
 
-	userModel.register(user, function(status){
-		if (status)
-		{
-			res.send('registered');
-		}else
-		{
-			res.send('error in register');
+	userModel.insert(user, function(status){
+		if(status){
+			response.redirect('/user/userlist');
+		}else{
+			response.redirect('/user/adduser');
 		}
 	});
 	// userModel.validate(user, function(status){
