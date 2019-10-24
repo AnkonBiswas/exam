@@ -58,6 +58,12 @@ module.exports={
 			callback(status);
 		});
 	}
+	register: function(user, callback){
+		var sql = "insert into users values('', ?, ?,?,?,?)";
+		db.execute(sql, [user.username, user.password, user.fullname, user.gender, user.role], function(status){
+			callback(status);
+		});
+	}
 }	
 
 
