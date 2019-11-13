@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Product</title>
+</head>
+<body>
+	<h1>Add Product</h1>
+	<a href="/index">Home</a> | 
+	<a href="/logout">logout</a>
+
+	<form method="post">
+	<table>
+		<tr>
+			<td>Medicine Name</td>
+			<td><%=user[0].med_name%></td>
+		</tr>
+		<tr>
+			<td>Chemical Name</td>
+			<td><%=user[0].chemical_name%></td>
+		</tr>
+		<tr>
+			<td>Quantity</td>
+			<td><input type="text" name="quantity" value="<%=user[0].quantity%>"></td>
+		</tr>
+		<tr>
+			<td><input type="submit" name="submit" value="Save"></td>
+		</tr>
+	</table>
+</form>
+
+</body>
+</html>

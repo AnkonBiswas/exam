@@ -1,0 +1,23 @@
+<h1>COURSES</h1>
+
+<a href="/faculty">PROFILE</a> |
+<a href="/logout">LOGOUT</a>
+
+<table border="1">
+    <tr>
+        <td>MEDICINE id</td>
+        <td>Quantity</td>
+    </tr>
+
+<% for(var i=0; i< user.length; i++){ %>
+    <tr>
+        <td><%= user[i].med_id %></td>
+        <td><%= user[i].quantity %></td>
+    </tr>
+
+<% } %>
+
+    
+</table>
+
+<a href="/customer/check_out">Check Out</a>

@@ -68,7 +68,7 @@ module.exports={
 		//});
 	//}
 
-	profile : function(username, callback){
+	admin_profile : function(username, callback){
 		var sql = "select * from admin where admin_name=?";
 
 		db.getResults(sql, [username], function(results){
@@ -129,6 +129,47 @@ module.exports={
 			callback(status);
 		});
 		},
-}	
+	
+
+///////////////////////////////////////////////////
+
+	cust_validate: function(user, callback){
+		console.log(user);
+		var sql = "select * from customer where cust_name=? and password=?";
+
+		db.getResults(sql, [user.username, user.password], function(result){
+
+			if(result ) {
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
+
+	customer_profile : function(username, callback){
+		var sql = "select * from customer where cust_name=?";
+
+		db.getResults(sql, [username], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+
+	insert_cart : function(user, callback){
+		console.log(user);
+		var sql = "INSERT INTO orders values('', ?, ?, ?);";
+		db.execute(sql, [user.username, user.address, user.cart], function(success){
+			callback(success);
+
+		});
+	},
+	
+
+}
 
 

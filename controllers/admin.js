@@ -3,10 +3,31 @@ var userModel = require('./../models/user-model');
 
 //var userModel = require('./../models/user-model');
 var router = express.Router();
+router.get('/login', function(req, res){
+	res.render('admin/admin_login');
+});
 
+router.post('/login', function(req, res){
+	
+	var user = {
+		username: req.body.username,
+		password: req.body.password
+	}
+
+	userModel.validate(user, function(status){
+		
+		if(status){
+			res.cookie('username', req.body.username);
+			res.redirect('/admin');	
+		}else{
+			res.send('invalid username/password');
+		}
+	});
+
+});
 router.get('/', function(req, res){
 	var username= req.cookies['username'];
-	userModel.profile(username, function(result){
+	userModel.admin_profile(username, function(result){
 		//console.log(result);
 		res.render('admin/index', {user: result});
 	});
@@ -17,9 +38,6 @@ router.get('/add_med', function(req, res){
 });
 
 router.post('/add_med', function(req, res){
-	//console.log(req.cookies['std_id']);
-	//console.log('im here');
-
 	var user = {
 		med_name: req.body.med_name,
 		chemical_name: req.body.chemical_name,
