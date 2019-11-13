@@ -46,6 +46,52 @@ router.get('/medicine_list', function(req, res){
 
 });
 
+router.get('/edit/:med_id', function(req, res){
+	//console.log(req.params.user_id);
+	res.clearCookie('med_id');
+	res.cookie('med_id', req.params.med_id);
+	//console.log(req.cookies['std_id']);
+	userModel.medicine_details(req.params.med_id, function(results){
+        res.render('admin/edit', {user: results});
+        //console.log(results);		
+	});
+
+});
+
+router.post('/edit/:med_id', function(req, res){
+	//console.log(req.cookies['std_id']);
+
+	var user = {
+		med_id: req.cookies['med_id'],
+		med_name:req.body.med_name,
+		chemical_name:req.body.chemical_name,
+		quantity:req.body.quantity
+	};
+
+	userModel.edit_medicine(user, function(status){
+		var url= '/admin/medicine_list';
+		if(status){
+			res.redirect(url);
+		}else{
+			res.redirect(url);
+		}
+	});
+});
+
+router.get('/delete_medicine/:med_id', function(req, res){
+	userModel.delete_medicine(req.params.med_id, function(result){
+		var url= '/admin/medicine_list';
+		if(result){
+			res.redirect(url);
+		}else{
+			res.redirect(url);
+		}
+		
+        //console.log(results);		
+	});
+
+});
+
 module.exports = router;
 
 

@@ -101,6 +101,34 @@ module.exports={
 		});
 	},
 
+	medicine_details :  function(med_id, callback){
+		var sql = "select * from medicine where med_id=?";
+
+		db.getResults(sql, [med_id], function(results){
+			//console.log(results);
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+
+	edit_medicine : function(user, callback){
+
+		//console.log(user);
+		var sql = "update medicine set med_name=?,chemical_name=?,quantity=? where med_id=?";		
+		db.execute(sql, [user.med_name, user.chemical_name, user.quantity, user.med_id], function(status){
+			callback(status);
+		});
+		},
+
+	delete_medicine : function(med_id, callback){
+		var sql = "DELETE FROM medicine WHERE med_id=?";
+		db.execute(sql, [med_id],  function(status){
+			callback(status);
+		});
+		},
 }	
 
 
