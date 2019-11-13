@@ -1,5 +1,4 @@
 var db = require('./db');
-
 module.exports={
 
 	getById: function(id, callback){
@@ -16,7 +15,8 @@ module.exports={
 		});
 	},
 	validate: function(user, callback){
-		var sql = "select * from users where username=? and password=?";
+		console.log(user);
+		var sql = "select * from admin where admin_name=? and admin_password=?";
 
 		db.getResults(sql, [user.username, user.password], function(result){
 
@@ -60,13 +60,47 @@ module.exports={
 		db.execute(sql, [],  function(status){
 			callback(status);
 		});
-	}
+	},
 	//register: function(user, callback){
 		//var sql = "insert into users values('', ?, ?,?,?,?)";
 		//db.execute(sql, [user.username, user.password, user.fullname, user.gender, user.role], function(status){
 			//callback(status);
 		//});
 	//}
+
+	profile : function(username, callback){
+		var sql = "select * from admin where admin_name=?";
+
+		db.getResults(sql, [username], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	add_medicine : function(user, callback){
+		console.log(user);
+		var sql = "insert into medicine values('', ?, ?, ?)";
+		db.execute(sql, [user.med_name, user.chemical_name, user.quantity], function(status){
+			callback(status);
+		});
+	},
+
+	medicine_list :  function(callback){
+		var sql = "select * from medicine order by med_name";
+
+		db.getResults(sql, [], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+
 }	
 
 

@@ -17,8 +17,8 @@ router.post('/', function(req, res){
 	userModel.validate(user, function(status){
 		
 		if(status){
-			res.cookie('username', req.body.uname);
-			res.redirect('/home');	
+			res.cookie('username', req.body.username);
+			res.redirect('/admin');	
 		}else{
 			res.send('invalid username/password');
 		}

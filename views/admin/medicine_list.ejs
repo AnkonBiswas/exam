@@ -1,0 +1,27 @@
+<h1>COURSES</h1>
+
+<a href="/faculty">PROFILE</a> |
+<a href="/logout">LOGOUT</a>
+
+<table border="1">
+    <tr>
+        <td>MEDICINE NAME</td>
+        <td>CHEMICAL NAME</td>
+        <td>QUANTITY</td>
+        <td>ACTION</td>
+    </tr>
+
+<% for(var i=0; i< user.length; i++){ %>
+    <tr>
+        <td><%= user[i].med_name %></td>
+        <td><%= user[i].chemical_name %></td>
+        <td><%= user[i].quantity %></td>
+        <td>
+            <a href="/faculty/apply_course/<%= user[i].course_id %>"> Edit </a>|
+            <a href="/faculty/apply_course/<%= user[i].course_id %>"> Delete 
+            
+        </td>
+    </tr>
+
+<% } %>
+</table>
