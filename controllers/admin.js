@@ -3,9 +3,35 @@ var userModel = require('./../models/user-model');
 
 //var userModel = require('./../models/user-model');
 var router = express.Router();
+
+router.get('/register', function(req, res){
+	res.render('admin/register');
+});
+
+router.post('/register', function(req, res){
+	
+	var user = {
+		admin_name: req.body.admin_name,
+		password: req.body.password,
+		email: req.body.email
+	}
+
+	userModel.admin_register(user, function(status){
+		
+		if(status){
+			res.redirect('/admin/login');	
+		}else{
+			res.redirect('/admin/register');	
+		}
+	});
+
+});
+
+
 router.get('/login', function(req, res){
 	res.render('admin/admin_login');
 });
+
 
 router.post('/login', function(req, res){
 	
@@ -110,6 +136,28 @@ router.get('/delete_medicine/:med_id', function(req, res){
 
 });
 
+router.get('/customer_list', function(req, res){
+    //res.render('courses/index');
+    
+    userModel.customer_list(function(results){
+		console.log(results);
+		res.render('admin/customer_list', {user: results});
+	});
+
+});
+router.get('/delete_customer/:cust_id', function(req, res){
+	userModel.delete_customer(req.params.cust_id, function(result){
+		var url= '/admin/customer_list';
+		if(result){
+			res.redirect(url);
+		}else{
+			res.redirect(url);
+		}
+		
+        //console.log(results);		
+	});
+
+});
 module.exports = router;
 
 

@@ -3,6 +3,27 @@ var userModel = require('./../models/user-model');
 var router = express.Router();
 
 var cart=new Array();
+router.get('/register', function(req, res){
+	res.render('customer/register');
+});
+router.post('/register', function(req, res){
+	
+	var user = {
+		cust_name: req.body.cust_name,
+		password: req.body.password,
+		email: req.body.email
+	}
+
+	userModel.cust_register(user, function(status){
+		
+		if(status){
+			res.redirect('/customer/login');	
+		}else{
+			res.redirect('/customer/register');	
+		}
+	});
+
+});
 
 
 router.get('/login', function(req, res){

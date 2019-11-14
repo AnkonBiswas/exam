@@ -1,0 +1,27 @@
+<title>Customer List</title>
+<h1>Customer List</h1>
+
+    <a href="/admin/">Profile</a> | 
+	<a href="/admin/add_med">Add Medicine</a> |
+	<a href="/admin/medicine_list">Medicine list</a> | 
+	<a href="/logout">logout</a>
+
+<table border="1">
+    <tr>
+        <td>Customer Name</td>
+        <td>Email</td>
+        <td>Action</td>
+    </tr>
+
+<% for(var i=0; i< user.length; i++){ %>
+    <tr>
+        <td><%= user[i].cust_name %></td>
+        <td><%= user[i].email %></td>
+        <td>
+            <a href="/admin/delete_customer/<%= user[i].cust_id %>"> Delete 
+            
+        </td>
+    </tr>
+
+<% } %>
+</table>
